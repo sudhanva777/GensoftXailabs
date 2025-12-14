@@ -1,7 +1,7 @@
-import { requireStudent } from "@/lib/auth-helpers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
 import { LayoutDashboard, ClipboardList, FolderKanban, User, LogOut, GraduationCap } from "lucide-react";
 import { LogoutButton } from "@/components/LogoutButton";
 
@@ -10,7 +10,10 @@ export default async function StudentLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await requireStudent();
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/auth/login");
+  if (session.user.role !== "STUDENT") redirect("/admin");
 
   const navItems = [
     { href: "/student", icon: LayoutDashboard, label: "Dashboard" },

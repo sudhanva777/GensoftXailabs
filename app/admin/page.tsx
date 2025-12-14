@@ -1,10 +1,15 @@
-import { requireAdmin } from "@/lib/auth-helpers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { Users, ClipboardCheck, FolderKanban, DollarSign, CheckCircle, Clock, AlertCircle } from "lucide-react";
 import Link from "next/link";
 
 export default async function AdminDashboard() {
-  const session = await requireAdmin();
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/auth/login");
+  if (session.user.role !== "ADMIN") redirect("/student");
 
   // Fetch all statistics
   const [

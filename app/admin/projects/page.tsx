@@ -1,10 +1,15 @@
-import { requireAdmin } from "@/lib/auth-helpers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { FolderKanban } from "lucide-react";
 import ProjectListItem from "./ProjectListItem";
 
 export default async function ProjectsPage() {
-  const session = await requireAdmin();
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/auth/login");
+  if (session.user.role !== "ADMIN") redirect("/student");
 
   const submissions = await prisma.projectSubmission.findMany({
     include: { User: true },

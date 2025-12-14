@@ -60,12 +60,14 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, account }) {
+      // Initial sign in
       if (user) {
         token.id = (user as any).id;
         token.role = (user as any).role ?? "STUDENT";
+        return token;
       }
 
-      // If logging in with Google and user exists in DB but has no role yet, ensure it defaults to STUDENT
+      // For Google OAuth - fetch user from DB to get role
       if (account && account.provider === "google") {
         const dbUser = await prisma.user.findUnique({
           where: { email: token.email ?? "" },
@@ -79,9 +81,9 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
-        (session.user as any).id = token.id;
-        (session.user as any).role = token.role ?? "STUDENT";
+      if (session.user && token) {
+        (session.user as any).id = token.id as string;
+        (session.user as any).role = (token.role as string) ?? "STUDENT";
       }
       return session;
     },

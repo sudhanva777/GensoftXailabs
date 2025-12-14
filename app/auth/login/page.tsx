@@ -30,13 +30,28 @@ export default function LoginPage() {
 
       if (result?.error) {
         setError("Invalid email or password");
-      } else {
-        router.push("/student");
-        router.refresh();
+        setIsLoading(false);
+      } else if (result?.ok) {
+        // Fetch session to determine user role
+        try {
+          const sessionRes = await fetch("/api/auth/session", {
+            credentials: "include",
+          });
+          const session = await sessionRes.json();
+          
+          // Redirect based on role
+          if (session?.user?.role === "ADMIN") {
+            window.location.href = "/admin";
+          } else {
+            window.location.href = "/student";
+          }
+        } catch (sessionError) {
+          // Fallback: redirect to student dashboard
+          window.location.href = "/student";
+        }
       }
     } catch (error) {
       setError("An error occurred. Please try again.");
-    } finally {
       setIsLoading(false);
     }
   };

@@ -1,10 +1,15 @@
-import { requireStudent } from "@/lib/auth-helpers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { User, Mail, Phone, Calendar, BookOpen } from "lucide-react";
 import ProfileForm from "./ProfileForm";
 
 export default async function ProfilePage() {
-  const session = await requireStudent();
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/auth/login");
+  if (session.user.role !== "STUDENT") redirect("/admin");
 
   if (!session.user?.email) {
     return <div>Error: No user information found</div>;

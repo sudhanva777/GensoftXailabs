@@ -1,10 +1,15 @@
-import { requireAdmin } from "@/lib/auth-helpers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ClipboardCheck, CheckCircle, XCircle, Clock, Eye } from "lucide-react";
 import Link from "next/link";
 
 export default async function TaskReviewPage() {
-  const session = await requireAdmin();
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/auth/login");
+  if (session.user.role !== "ADMIN") redirect("/student");
 
   const submissions = await prisma.taskSubmission.findMany({
     include: {

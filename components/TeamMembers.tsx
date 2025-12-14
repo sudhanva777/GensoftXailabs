@@ -11,7 +11,7 @@ const teamMembers = [
   },
   {
     name: "Sudhanva Patil",
-    role: "Chief Learning Officer (CLO) & Technical Head",
+    role: "Co-Founder & Technical Head",
     image: "/team/sudhanva.jpg",
     description:
       "Oversees curriculum design, learning pathways, major project structure, and student training experience.",

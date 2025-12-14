@@ -1,4 +1,6 @@
-import { requireAdmin } from "@/lib/auth-helpers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ArrowLeft, User } from "lucide-react";
 import Link from "next/link";
@@ -10,7 +12,10 @@ export default async function AdminChatPage({
 }: {
   params: { studentId: string };
 }) {
-  const session = await requireAdmin();
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/auth/login");
+  if (session.user.role !== "ADMIN") redirect("/student");
 
   // Get current admin user
   if (!session.user?.email) {

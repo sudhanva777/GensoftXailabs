@@ -1,10 +1,15 @@
-import { requireAdmin } from "@/lib/auth-helpers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { Calendar, CheckCircle, XCircle, TrendingUp, Award, AlertCircle } from "lucide-react";
 import AttendanceMarkingForm from "./AttendanceMarkingForm";
 
 export default async function AdminAttendancePage() {
-  const session = await requireAdmin();
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/auth/login");
+  if (session.user.role !== "ADMIN") redirect("/student");
 
   // Get all students
   const students = await prisma.user.findMany({

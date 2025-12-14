@@ -1,9 +1,14 @@
-import { requireStudent } from "@/lib/auth-helpers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { GraduationCap, BookOpen, CheckCircle, Clock } from "lucide-react";
 
 export default async function StudentDashboard() {
-  const session = await requireStudent();
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/auth/login");
+  if (session.user.role !== "STUDENT") redirect("/admin");
 
   if (!session.user?.email) {
     return <div>Error: No user email found</div>;

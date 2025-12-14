@@ -1,4 +1,6 @@
-import { requireAdmin } from "@/lib/auth-helpers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ClipboardList, Plus, Filter } from "lucide-react";
 import NewTaskForm from "./NewTaskForm";
@@ -9,7 +11,10 @@ export default async function TasksPage({
 }: {
   searchParams: { assignTo?: string; status?: string; week?: string; student?: string };
 }) {
-  const session = await requireAdmin();
+  const session = await getServerSession(authOptions);
+
+  if (!session) redirect("/auth/login");
+  if (session.user.role !== "ADMIN") redirect("/student");
 
   const assignToUserId = searchParams.assignTo;
   const statusFilter = searchParams.status;
