@@ -115,7 +115,9 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              {status === "loading" ? null : !session ? (
+              {status === "loading" ? (
+                <div className="px-4 py-2 text-gray-400 text-sm">Loading...</div>
+              ) : !session ? (
                 <>
                   <Link
                     href="/auth/login"

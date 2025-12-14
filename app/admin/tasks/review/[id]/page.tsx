@@ -14,8 +14,9 @@ export default async function TaskReviewDetailPage({
 }) {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/student");
+  const user = session?.user;
+  if (!user) redirect("/auth/login");
+  if (user.role !== "ADMIN") redirect("/student");
 
   const submission = await prisma.taskSubmission.findUnique({
     where: { id: params.id },

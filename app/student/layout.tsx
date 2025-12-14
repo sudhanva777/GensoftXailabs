@@ -12,8 +12,9 @@ export default async function StudentLayout({
 }) {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "STUDENT") redirect("/admin");
+  const user = session?.user;
+  if (!user) redirect("/auth/login");
+  if (user.role !== "STUDENT") redirect("/admin");
 
   const navItems = [
     { href: "/student", icon: LayoutDashboard, label: "Dashboard" },

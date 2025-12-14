@@ -16,6 +16,8 @@ export const authOptions: NextAuthOptions = {
     signIn: "/auth/login",
   },
   debug: process.env.NODE_ENV === "development",
+  // Ensure proper URL handling for production
+  trustHost: true,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -32,8 +34,11 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        // Normalize email to match registration (lowercase, trim)
+        const normalizedEmail = credentials.email.toLowerCase().trim();
+
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: { email: normalizedEmail },
         });
 
         if (!user || !user.passwordHash) {

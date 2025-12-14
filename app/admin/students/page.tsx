@@ -8,8 +8,9 @@ import Link from "next/link";
 export default async function StudentsPage() {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/student");
+  const user = session?.user;
+  if (!user) redirect("/auth/login");
+  if (user.role !== "ADMIN") redirect("/student");
 
   const users = await prisma.user.findMany({
     include: { StudentProfile: true },

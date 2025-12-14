@@ -32,23 +32,32 @@ export default function LoginPage() {
         setError("Invalid email or password");
         setIsLoading(false);
       } else if (result?.ok) {
-        // Fetch session to determine user role
-        try {
-          const sessionRes = await fetch("/api/auth/session", {
-            credentials: "include",
-          });
-          const session = await sessionRes.json();
-          
-          // Redirect based on role
-          if (session?.user?.role === "ADMIN") {
-            window.location.href = "/admin";
-          } else {
+        // Wait a moment for session to be set, then fetch and redirect
+        setTimeout(async () => {
+          try {
+            const sessionRes = await fetch("/api/auth/session", {
+              credentials: "include",
+              cache: "no-store",
+            });
+            
+            if (!sessionRes.ok) {
+              window.location.href = "/student";
+              return;
+            }
+            
+            const session = await sessionRes.json();
+            
+            // Redirect based on role
+            if (session?.user?.role === "ADMIN") {
+              window.location.href = "/admin";
+            } else {
+              window.location.href = "/student";
+            }
+          } catch (sessionError) {
+            // Fallback: redirect to student dashboard
             window.location.href = "/student";
           }
-        } catch (sessionError) {
-          // Fallback: redirect to student dashboard
-          window.location.href = "/student";
-        }
+        }, 200);
       }
     } catch (error) {
       setError("An error occurred. Please try again.");

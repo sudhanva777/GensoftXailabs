@@ -8,8 +8,9 @@ import AttendanceMarkingForm from "./AttendanceMarkingForm";
 export default async function AdminAttendancePage() {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/student");
+  const user = session?.user;
+  if (!user) redirect("/auth/login");
+  if (user.role !== "ADMIN") redirect("/student");
 
   // Get all students
   const students = await prisma.user.findMany({

@@ -13,10 +13,11 @@ export default async function StudentDetailPage({
 }) {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/student");
+  const sessionUser = session?.user;
+  if (!sessionUser) redirect("/auth/login");
+  if (sessionUser.role !== "ADMIN") redirect("/student");
 
-  const user = await prisma.user.findUnique({
+  const dbUser = await prisma.user.findUnique({
     where: { id: params.id },
     include: {
       StudentProfile: true,
@@ -30,12 +31,12 @@ export default async function StudentDetailPage({
     },
   });
 
-  if (!user) {
+  if (!dbUser) {
     notFound();
   }
 
-  const completedTasks = user.StudentTask.filter((t) => t.status === "COMPLETED").length;
-  const totalTasks = user.StudentTask.length;
+  const completedTasks = dbUser.StudentTask.filter((t) => t.status === "COMPLETED").length;
+  const totalTasks = dbUser.StudentTask.length;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -47,7 +48,7 @@ export default async function StudentDetailPage({
           ← Back to Students
         </Link>
         <h1 className="text-4xl font-extrabold text-gray-900 mb-2">
-          Student Profile: {user.name || "N/A"}
+          Student Profile: {dbUser.name || "N/A"}
         </h1>
         <p className="text-gray-600">View student details, tasks, and project submissions</p>
       </div>
@@ -63,7 +64,7 @@ export default async function StudentDetailPage({
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                <p className="text-gray-900 font-semibold">{user.name || "Not set"}</p>
+                <p className="text-gray-900 font-semibold">{dbUser.name || "Not set"}</p>
               </div>
             </div>
 
@@ -73,7 +74,7 @@ export default async function StudentDetailPage({
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <p className="text-gray-900 font-semibold">{user.email || "Not set"}</p>
+                <p className="text-gray-900 font-semibold">{dbUser.email || "Not set"}</p>
               </div>
             </div>
 
@@ -83,7 +84,7 @@ export default async function StudentDetailPage({
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                <p className="text-gray-900 font-semibold">{user.phone || "Not provided"}</p>
+                <p className="text-gray-900 font-semibold">{dbUser.phone || "Not provided"}</p>
               </div>
             </div>
 
@@ -96,7 +97,7 @@ export default async function StudentDetailPage({
                   Program Track
                 </label>
                 <p className="text-gray-900 font-semibold">
-                  {user.StudentProfile?.programTrack || "Not enrolled"}
+                  {dbUser.StudentProfile?.programTrack || "Not enrolled"}
                 </p>
               </div>
             </div>
@@ -108,7 +109,7 @@ export default async function StudentDetailPage({
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Joined Date</label>
                 <p className="text-gray-900 font-semibold">
-                  {new Date(user.createdAt).toLocaleDateString()}
+                  {new Date(dbUser.createdAt).toLocaleDateString()}
                 </p>
               </div>
             </div>
@@ -135,7 +136,7 @@ export default async function StudentDetailPage({
             </div>
           </div>
           <Link
-            href={`/admin/tasks?assignTo=${user.id}`}
+            href={`/admin/tasks?assignTo=${dbUser.id}`}
             className="mt-6 btn-primary w-full text-center inline-block"
           >
             Assign New Task
@@ -149,11 +150,11 @@ export default async function StudentDetailPage({
           <ClipboardList className="h-6 w-6 text-[#4F46E5]" />
           Assigned Tasks
         </h2>
-        {user.StudentTask.length === 0 ? (
+        {dbUser.StudentTask.length === 0 ? (
           <p className="text-gray-500 text-center py-8">No tasks assigned yet</p>
         ) : (
           <div className="space-y-4">
-            {user.StudentTask.map((studentTask) => (
+            {dbUser.StudentTask.map((studentTask) => (
               <div
                 key={studentTask.id}
                 className="p-4 border border-gray-200 rounded-lg hover:border-[#4F46E5] transition-colors"
@@ -202,11 +203,11 @@ export default async function StudentDetailPage({
           <FolderKanban className="h-6 w-6 text-[#4F46E5]" />
           Project Submissions
         </h2>
-        {user.ProjectSubmission.length === 0 ? (
+        {dbUser.ProjectSubmission.length === 0 ? (
           <p className="text-gray-500 text-center py-8">No project submissions yet</p>
         ) : (
           <div className="space-y-4">
-            {user.ProjectSubmission.map((submission) => (
+            {dbUser.ProjectSubmission.map((submission) => (
               <Link
                 key={submission.id}
                 href={`/admin/projects/${submission.id}`}

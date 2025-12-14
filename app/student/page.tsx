@@ -7,15 +7,16 @@ import { GraduationCap, BookOpen, CheckCircle, Clock } from "lucide-react";
 export default async function StudentDashboard() {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "STUDENT") redirect("/admin");
+  const sessionUser = session?.user;
+  if (!sessionUser) redirect("/auth/login");
+  if (sessionUser.role !== "STUDENT") redirect("/admin");
 
-  if (!session.user?.email) {
+  if (!sessionUser.email) {
     return <div>Error: No user email found</div>;
   }
 
   const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
+    where: { email: sessionUser.email },
     include: {
       StudentProfile: true,
       StudentTask: {

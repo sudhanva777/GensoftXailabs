@@ -8,8 +8,9 @@ import Link from "next/link";
 export default async function TaskReviewPage() {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/student");
+  const user = session?.user;
+  if (!user) redirect("/auth/login");
+  if (user.role !== "ADMIN") redirect("/student");
 
   const submissions = await prisma.taskSubmission.findMany({
     include: {

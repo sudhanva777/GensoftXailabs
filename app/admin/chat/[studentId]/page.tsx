@@ -14,16 +14,17 @@ export default async function AdminChatPage({
 }) {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/auth/login");
-  if (session.user.role !== "ADMIN") redirect("/student");
+  const user = session?.user;
+  if (!user) redirect("/auth/login");
+  if (user.role !== "ADMIN") redirect("/student");
 
   // Get current admin user
-  if (!session.user?.email) {
+  if (!user.email) {
     return <div>Error: No user email found</div>;
   }
 
   const admin = await prisma.user.findUnique({
-    where: { email: session.user.email },
+    where: { email: user.email },
     select: { id: true },
   });
 
