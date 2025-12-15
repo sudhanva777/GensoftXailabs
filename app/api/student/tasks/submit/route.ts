@@ -37,11 +37,19 @@ export async function POST(req: NextRequest) {
 
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
-      select: { id: true },
+      select: { id: true, role: true },
     });
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Role check: Only students can submit tasks
+    if (user.role !== "STUDENT") {
+      return NextResponse.json(
+        { error: "Unauthorized: Only students can submit tasks" },
+        { status: 403 }
+      );
     }
 
     const userId = user.id;
@@ -57,7 +65,9 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    const answerText = formData.get("answerText") as string;
+
+    // Support both "answer" and "answerText" for compatibility
+    const answer = (formData.get("answer") as string | null) || (formData.get("answerText") as string | null);
     const file = formData.get("file") as File | null;
     const submissionId = formData.get("submissionId") as string | null;
 
@@ -68,9 +78,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Validation: Either answer (non-empty) or file must be provided
+    const answerText = answer?.trim() || null;
     if (!answerText && !file) {
       return NextResponse.json(
-        { error: "Please provide either a text answer or upload a file" },
+        { error: "Provide an answer or upload a file" },
         { status: 400 }
       );
     }
@@ -81,8 +93,16 @@ export async function POST(req: NextRequest) {
       include: { User: true, Task: true },
     });
 
-    if (!studentTask || studentTask.userId !== userId) {
-      return NextResponse.json({ error: "Task not found or unauthorized" }, { status: 404 });
+    if (!studentTask) {
+      return NextResponse.json({ error: "Task not found" }, { status: 404 });
+    }
+
+    // Ownership check: Ensure the task belongs to the current student
+    if (studentTask.userId !== userId) {
+      return NextResponse.json(
+        { error: "Unauthorized submission" },
+        { status: 403 }
+      );
     }
 
     // Check if submission already exists and is not rejected
@@ -138,7 +158,7 @@ export async function POST(req: NextRequest) {
       const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
       if (file.size > MAX_FILE_SIZE) {
         return NextResponse.json(
-          { error: "File size must be less than 10MB" },
+          { error: "File size exceeds 10MB" },
           { status: 400 }
         );
       }
@@ -168,29 +188,43 @@ export async function POST(req: NextRequest) {
       fileUrl = `/uploads/tasks/${safeFileName}`;
     }
 
+    // Ownership check: Verify submission belongs to current student (if updating)
+    if (submissionId) {
+      const existingSubmission = await prisma.taskSubmission.findUnique({
+        where: { id: submissionId },
+      });
+      if (existingSubmission && existingSubmission.studentId !== userId) {
+        return NextResponse.json(
+          { error: "Unauthorized submission" },
+          { status: 403 }
+        );
+      }
+    }
+
     // Create or update submission
     if (submissionId) {
       // Update existing rejected submission
       await prisma.taskSubmission.update({
         where: { id: submissionId },
         data: {
-          answerText: answerText || null,
+          answerText: answerText,
           fileUrl: fileUrl || undefined,
-          status: "PENDING",
+          status: "SUBMITTED",
           feedback: null, // Clear previous feedback
           updatedAt: new Date(),
         },
       });
     } else {
       // Create new submission
+      // Note: submittedAt is tracked via createdAt field
       await prisma.taskSubmission.create({
         data: {
           id: crypto.randomUUID(),
           studentId: userId,
           taskId: taskId,
-          answerText: answerText || null,
+          answerText: answerText,
           fileUrl: fileUrl,
-          status: "PENDING",
+          status: "SUBMITTED",
           updatedAt: new Date(),
         },
       });
