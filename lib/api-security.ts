@@ -84,3 +84,35 @@ export function validateUUIDParam(param: string | undefined): boolean {
   return uuidRegex.test(param);
 }
 
+// Sanitize text input (prevent XSS and abuse)
+export function sanitizeText(text: string, maxLength: number = 10000): string {
+  return text
+    .trim()
+    .slice(0, maxLength)
+    .replace(/[<>]/g, "") // Remove potential HTML tags
+    .replace(/javascript:/gi, "") // Remove javascript: protocol
+    .replace(/on\w+=/gi, ""); // Remove event handlers
+}
+
+// Validate email format
+export function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && email.length <= 254;
+}
+
+// Validate and sanitize input length
+export function validateLength(
+  value: string,
+  min: number,
+  max: number,
+  fieldName: string
+): { valid: boolean; error?: string } {
+  if (value.length < min) {
+    return { valid: false, error: `${fieldName} must be at least ${min} characters` };
+  }
+  if (value.length > max) {
+    return { valid: false, error: `${fieldName} must be at most ${max} characters` };
+  }
+  return { valid: true };
+}
+

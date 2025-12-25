@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { secureErrorResponse } from "@/lib/api-security";
 
 export const dynamic = 'force-dynamic';
 
@@ -45,8 +46,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, task }, { status: 201 });
   } catch (error) {
-    console.error("Task creation error:", error);
-    return NextResponse.json({ error: "Failed to create task" }, { status: 500 });
+    return secureErrorResponse(error, "Failed to create task");
   }
 }
 

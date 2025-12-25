@@ -1,7 +1,8 @@
 "use client";
 
-import { Search, Bell } from "lucide-react";
+import { Search } from "lucide-react";
 import AvatarDropdown from "./AvatarDropdown";
+import NotificationBell from "./NotificationBell";
 
 interface AdminTopNavProps {
   user: {
@@ -34,10 +35,7 @@ export default function AdminTopNav({ user }: AdminTopNavProps) {
           {/* Right side */}
           <div className="flex items-center gap-3">
             {/* Notifications */}
-            <button className="relative p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-              <Bell className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-              <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full" />
-            </button>
+            <NotificationBell />
 
             {/* Avatar Dropdown */}
             <AvatarDropdown />

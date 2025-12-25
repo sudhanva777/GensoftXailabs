@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { GraduationCap, BookOpen, CheckCircle, Clock, TrendingUp, FileText, Target } from "lucide-react";
 import Link from "next/link";
 import StudentDashboardClient from "./DashboardClient";
+import StudentProgress from "@/components/StudentProgress";
 
 export default async function StudentDashboard() {
   const session = await getServerSession(authOptions);
@@ -204,6 +205,9 @@ export default async function StudentDashboard() {
 
         {/* Stats Sidebar */}
         <div className="space-y-6">
+          {/* Program Progress */}
+          <StudentProgress />
+
           {/* Pending Tasks */}
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Task Summary</h3>

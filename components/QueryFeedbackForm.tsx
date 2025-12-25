@@ -28,10 +28,11 @@ export default function QueryFeedbackForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
+          name: formData.name.trim(),
+          email: formData.email.trim().toLowerCase(),
           phone: "",
-          message: `Type: ${formData.type === "query" ? "Query" : "Feedback"}\n\nMessage: ${formData.message}`,
+          message: formData.message.trim(),
+          type: formData.type,
         }),
       });
 

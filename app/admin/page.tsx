@@ -2,10 +2,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { Users, ClipboardCheck, FolderKanban, CheckCircle, Clock, AlertCircle, TrendingUp, UserCheck } from "lucide-react";
+import { Users, ClipboardCheck, FolderKanban, CheckCircle, Clock, AlertCircle, TrendingUp, UserCheck, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import Avatar from "@/components/Avatar";
 import { AdminDashboardClient, StudentsList } from "./DashboardClient";
+import AdminAnalytics from "@/components/AdminAnalytics";
 
 export default async function AdminDashboard() {
   const session = await getServerSession(authOptions);
@@ -119,37 +120,29 @@ export default async function AdminDashboard() {
   ]);
 
   const pendingReviews = pendingProjectSubmissions + pendingTaskSubmissions;
+  // Placeholder for queries/feedback count (can be connected to database later)
+  const queriesFeedbackCount = 0; // TODO: Connect to contact form submissions if stored in DB
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-1">
+      <div className="mb-8">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-2">
           Admin Dashboard
         </h1>
-        <p className="text-slate-600 dark:text-slate-400">Overview of students, tasks, and submissions</p>
+        <p className="text-lg text-slate-600 dark:text-slate-400">
+          Overview of students, tasks, and submissions
+        </p>
+      </div>
+
+      {/* Analytics Section */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Platform Analytics</h2>
+        <AdminAnalytics />
       </div>
 
       {/* KPI Row - 4 Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <AdminKPICard
-          icon={Users}
-          label="Total Students"
-          value={totalStudents}
-          trend={null}
-          gradient="from-indigo-500/10 to-indigo-600/5"
-          iconColor="text-indigo-600 dark:text-indigo-400"
-          iconBg="bg-indigo-100 dark:bg-indigo-900/30"
-        />
-        <AdminKPICard
-          icon={UserCheck}
-          label="Active Interns"
-          value={activeInterns}
-          trend={null}
-          gradient="from-green-500/10 to-green-600/5"
-          iconColor="text-green-600 dark:text-green-400"
-          iconBg="bg-green-100 dark:bg-green-900/30"
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <AdminKPICard
           icon={Clock}
           label="Pending Reviews"
@@ -167,6 +160,24 @@ export default async function AdminDashboard() {
           gradient="from-blue-500/10 to-blue-600/5"
           iconColor="text-blue-600 dark:text-blue-400"
           iconBg="bg-blue-100 dark:bg-blue-900/30"
+        />
+        <AdminKPICard
+          icon={CheckCircle}
+          label="Completed Tasks"
+          value={completedTasks}
+          trend={null}
+          gradient="from-green-500/10 to-green-600/5"
+          iconColor="text-green-600 dark:text-green-400"
+          iconBg="bg-green-100 dark:bg-green-900/30"
+        />
+        <AdminKPICard
+          icon={AlertCircle}
+          label="Pending Tasks"
+          value={pendingTasks}
+          trend={null}
+          gradient="from-orange-500/10 to-orange-600/5"
+          iconColor="text-orange-600 dark:text-orange-400"
+          iconBg="bg-orange-100 dark:bg-orange-900/30"
         />
       </div>
 
@@ -187,8 +198,10 @@ export default async function AdminDashboard() {
             </div>
             <div className="divide-y divide-slate-200 dark:divide-slate-700">
               {recentStudents.length === 0 ? (
-                <div className="px-6 py-8 text-center text-slate-500 dark:text-slate-400 text-sm">
-                  No students yet
+                <div className="px-6 py-12 text-center">
+                  <Users className="h-12 w-12 text-slate-400 dark:text-slate-600 mx-auto mb-4" />
+                  <p className="text-slate-500 dark:text-slate-400 font-medium mb-1">No students yet</p>
+                  <p className="text-sm text-slate-400 dark:text-slate-500">Students will appear here once they register</p>
                 </div>
               ) : (
                 recentStudents.map((student) => (
@@ -242,8 +255,10 @@ export default async function AdminDashboard() {
             </div>
             <div className="divide-y divide-slate-200 dark:divide-slate-700">
               {recentSubmissions.length === 0 ? (
-                <div className="px-6 py-8 text-center text-slate-500 dark:text-slate-400 text-sm">
-                  No submissions yet
+                <div className="px-6 py-12 text-center">
+                  <FolderKanban className="h-12 w-12 text-slate-400 dark:text-slate-600 mx-auto mb-4" />
+                  <p className="text-slate-500 dark:text-slate-400 font-medium mb-1">No submissions yet</p>
+                  <p className="text-sm text-slate-400 dark:text-slate-500">Project submissions will appear here</p>
                 </div>
               ) : (
                 recentSubmissions.map((submission) => (

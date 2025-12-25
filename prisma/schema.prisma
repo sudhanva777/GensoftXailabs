@@ -92,14 +92,16 @@ model Session {
 }
 
 model StudentProfile {
-  id             String    @id
-  userId         String    @unique
-  enrollmentDate DateTime?
-  programTrack   String?
-  status         String    @default("ACTIVE")
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime
-  User           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id              String    @id
+  userId          String    @unique
+  enrollmentDate  DateTime?
+  programTrack    String?
+  status          String    @default("ACTIVE")
+  progressWeek    Int?      @default(1)
+  progressPercent Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime
+  User            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model StudentTask {
@@ -169,6 +171,7 @@ model User {
   StudentProfile                   StudentProfile?
   StudentTask                      StudentTask[]
   TaskSubmission                   TaskSubmission[]
+  Notification                     Notification[]
 }
 
 model VerificationToken {
@@ -177,4 +180,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Notification {
+  id        String   @id
+  userId    String
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
 }

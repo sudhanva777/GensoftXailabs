@@ -61,6 +61,7 @@ export const otpResendRateLimit = createRateLimiter(2, 10 * 60 * 1000); // 2 res
 export const contactRateLimit = createRateLimiter(5, 60 * 60 * 1000); // 5 messages per hour
 export const chatRateLimit = createRateLimiter(30, 60 * 1000); // 30 messages per minute
 export const apiRateLimit = createRateLimiter(100, 60 * 1000); // 100 requests per minute
+export const avatarUploadRateLimit = createRateLimiter(10, 60 * 1000); // 10 uploads per minute per user/IP
 
 // Helper to get identifier from request
 export function getRateLimitIdentifier(req: Request): string {
