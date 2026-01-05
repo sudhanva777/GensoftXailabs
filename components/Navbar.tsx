@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
-import { Menu, X, LogOut, Sun, Moon } from "lucide-react";
+import { Menu, X, LogOut, Sun, Moon, Phone } from "lucide-react";
 import Logo from "./Logo";
 import { motion, AnimatePresence } from "framer-motion";
 import AvatarDropdown from "./AvatarDropdown";
@@ -41,6 +41,9 @@ export default function Navbar() {
   const userRole = useMemo(() => {
     return session?.user ? (session.user as any).role : null;
   }, [session?.user]);
+
+  // Get the Labs URL from environment variable
+  const labsUrl = process.env.NEXT_PUBLIC_LABS_URL;
 
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-800/50 shadow-sm">
@@ -85,7 +88,7 @@ export default function Navbar() {
                 <Moon className="h-5 w-5" />
               )}
             </button>
-              {status === "loading" ? (
+            {status === "loading" ? (
               <div className="h-9 w-20 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse" />
             ) : !session ? (
               <>
@@ -95,6 +98,23 @@ export default function Navbar() {
                 >
                   Login
                 </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-lg hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-all shadow-sm hover:shadow-md"
+                >
+                  <Phone className="h-4 w-4" />
+                  Book Call
+                </Link>
+                {labsUrl && (
+                  <a
+                    href={labsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-lg hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-all shadow-sm hover:shadow-md"
+                  >
+                    We Build Projects
+                  </a>
+                )}
                 <Link
                   href="/contact"
                   className="px-5 py-2 text-sm font-semibold text-white bg-[#4F46E5] rounded-lg hover:bg-[#4338ca] transition-colors shadow-sm"
@@ -161,18 +181,37 @@ export default function Navbar() {
                     </Link>
                   );
                 })}
-                <div className="pt-4 border-t border-slate-200 space-y-2">
+                <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
                   {status === "loading" ? (
                     <div className="px-4 py-2 text-sm text-slate-400">Loading...</div>
                   ) : !session ? (
                     <>
                       <Link
                         href="/auth/login"
-                        className="block px-4 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
+                        className="block px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Login
                       </Link>
+                      <Link
+                        href="/contact"
+                        className="flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-lg hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-all shadow-sm"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <Phone className="h-4 w-4" />
+                        Book Call
+                      </Link>
+                      {labsUrl && (
+                        <a
+                          href={labsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-lg hover:border-indigo-300 dark:hover:border-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 text-center transition-all shadow-sm"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          We Build Projects
+                        </a>
+                      )}
                       <Link
                         href="/contact"
                         className="block px-4 py-2 text-sm font-semibold text-white bg-[#4F46E5] rounded-lg hover:bg-[#4338ca] text-center transition-colors"
