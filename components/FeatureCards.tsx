@@ -49,7 +49,7 @@ function FeatureCards() {
           className="text-center mb-8"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-3">
-            Why Choose Apex Tech Innovation
+            Why Choose Gensoft X AI Labs
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Building industry-ready tech talent across AI, ML, and Full-Stack Engineering

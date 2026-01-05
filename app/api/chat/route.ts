@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-    const systemInstruction = `You are Apex Tech's helpful AI assistant. You help students understand Data Science, internships, major projects, tech career pathways, and details about Apex Tech programs. Your responses should be simple, clear, friendly, and helpful.`;
+    const systemInstruction = `You are Gensoft X AI Labs' helpful AI assistant. You help students understand Data Science, internships, major projects, tech career pathways, and details about Gensoft X AI Labs programs. Your responses should be simple, clear, friendly, and helpful.`;
 
     const conversationHistory = messages
       .map((m: { role: string; content: string }) => {

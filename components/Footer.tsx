@@ -94,7 +94,7 @@ export default function Footer() {
 
         <div className="border-t border-slate-800 mt-12 pt-8">
           <p className="text-center text-slate-400 text-sm">
-            © {currentYear} Apex Tech Innovation Pvt Ltd. All rights reserved.
+            © {currentYear} Gensoft X AI Labs. All rights reserved.
           </p>
         </div>
       </div>

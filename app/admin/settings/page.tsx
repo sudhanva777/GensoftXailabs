@@ -90,7 +90,7 @@ export default async function AdminSettingsPage() {
             <div className="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
               <p className="text-sm font-medium text-slate-900 dark:text-white mb-1">Platform Version</p>
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Apex Tech Innovation Admin Portal v1.0
+                Gensoft X AI Labs Admin Portal v1.0
               </p>
             </div>
           </div>

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
   }
   return {
-    title: `${post.title} | Apex Tech Innovation Blog`,
+    title: `${post.title} | Gensoft X AI Labs Blog`,
     description: post.excerpt,
   };
 }

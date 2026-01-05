@@ -80,7 +80,7 @@ export default function Program() {
         <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
-              Apex Tech Innovation{" "}
+              Gensoft X AI Labs{" "}
               <span className="text-indigo-600 dark:text-indigo-400">
                 Training Programs
               </span>

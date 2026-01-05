@@ -30,7 +30,7 @@ async function sendOTPEmail(email: string, otp: string) {
   const mailOptions = {
     from: process.env.SMTP_EMAIL,
     to: email,
-    subject: "ApexTech Password Reset Code",
+    subject: "Gensoft X AI Labs Password Reset Code",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #4F46E5;">Password Reset Request</h2>

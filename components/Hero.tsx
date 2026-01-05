@@ -71,7 +71,7 @@ function Hero() {
           >
             <Sparkles className="h-4 w-4 text-indigo-600" />
             <span className="text-sm font-semibold text-indigo-600">
-              Apex Tech Innovation Pvt Ltd
+              Gensoft X AI Labs
             </span>
           </motion.div>
 

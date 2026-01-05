@@ -78,7 +78,7 @@ export default function RegisterPage() {
             <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
               Create Account
             </h1>
-            <p className="text-slate-600 dark:text-slate-400">Join Apex Tech Innovation</p>
+            <p className="text-slate-600 dark:text-slate-400">Join Gensoft X AI Labs</p>
           </div>
 
           {error && (

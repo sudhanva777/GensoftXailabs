@@ -56,7 +56,7 @@ export default function Testimonials() {
             What Our Students Say
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Real experiences from our Apex Tech Innovation community
+            Real experiences from our Gensoft X AI Labs community
           </p>
         </motion.div>
 

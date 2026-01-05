@@ -34,7 +34,7 @@ export default function AssistantPage() {
           setMessages([
             {
               role: "assistant",
-              content: "Hi! I'm Apex AI Assistant. I can help you with the ApexTech LMS portal, your tasks, projects, attendance, and other portal features. How can I assist you today?",
+              content: "Hi! I'm Gensoft X AI Labs Assistant. I can help you with the Gensoft X AI Labs LMS portal, your tasks, projects, attendance, and other portal features. How can I assist you today?",
             },
           ]);
         }
@@ -44,7 +44,7 @@ export default function AssistantPage() {
         setMessages([
           {
             role: "assistant",
-            content: "Hi! I'm Apex AI Assistant. I can help you with the ApexTech LMS portal, your tasks, projects, attendance, and other portal features. How can I assist you today?",
+            content: "Hi! I'm Gensoft X AI Labs Assistant. I can help you with the Gensoft X AI Labs LMS portal, your tasks, projects, attendance, and other portal features. How can I assist you today?",
           },
         ]);
       } finally {
@@ -120,8 +120,8 @@ export default function AssistantPage() {
             </h1>
             <p className="text-gray-600">
               {typeof window !== "undefined" && window.location.pathname.includes("/assistant")
-                ? "Ask anything about the ApexTech LMS portal, your tasks, projects, or learning journey."
-                : "Ask anything about the ApexTech LMS portal, your tasks, projects, or learning journey."}
+                ? "Ask anything about the Gensoft X AI Labs LMS portal, your tasks, projects, or learning journey."
+                : "Ask anything about the Gensoft X AI Labs LMS portal, your tasks, projects, or learning journey."}
             </p>
           </div>
 

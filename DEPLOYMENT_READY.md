@@ -1,4 +1,4 @@
-# 🚀 Deployment Ready - ApexTech Next.js + Prisma + PostgreSQL (Neon)
+# 🚀 Deployment Ready - Gensoft X AI Labs Next.js + Prisma + PostgreSQL (Neon)
 
 ## ✅ Your project is 100% ready for deployment!
 

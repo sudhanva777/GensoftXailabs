@@ -4,7 +4,7 @@ import { RadialGlowBackground } from "@/components/SVGBackgrounds";
 
 export const metadata = {
   title: "Contact & Apply",
-  description: "Get in touch with Apex Tech Innovation or apply for our Data Science program.",
+  description: "Get in touch with Gensoft X AI Labs or apply for our Data Science program.",
 };
 
 export default function Contact() {

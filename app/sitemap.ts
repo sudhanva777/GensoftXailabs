@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://apextechinnovation.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gensoftxailabs.com";
 
   const posts = getAllPosts();
   const blogUrls = posts.map((post) => ({

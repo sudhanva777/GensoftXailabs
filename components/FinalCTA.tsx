@@ -18,7 +18,7 @@ export default function FinalCTA() {
           className="max-w-3xl mx-auto text-center"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Join Apex Tech Innovation
+            Join Gensoft X AI Labs
           </h2>
           <p className="text-lg md:text-xl mb-8 text-indigo-100 leading-relaxed">
             Build industry-ready skills across Data Science, AI Engineering, ML, and Full-Stack Systems. Join our ecosystem of tech professionals.

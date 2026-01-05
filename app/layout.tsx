@@ -23,31 +23,31 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Apex Tech Innovation Pvt Ltd - Data Science Training & Internship",
-    template: "%s | Apex Tech Innovation",
+    default: "Gensoft X AI Labs - Data Science Training & Internship",
+    template: "%s | Gensoft X AI Labs",
   },
   description: "Become a job-ready Data Scientist in 1-3 months. Hands-on Data Science training with real-world projects and internship experience.",
   keywords: ["Data Science", "Training", "Internship", "Python", "Machine Learning", "Data Analysis"],
-  authors: [{ name: "Apex Tech Innovation" }],
+  authors: [{ name: "Gensoft X AI Labs" }],
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://apextechinnovation.com",
-    siteName: "Apex Tech Innovation",
-    title: "Apex Tech Innovation - Data Science Training & Internship",
+    url: "https://gensoftxailabs.com",
+    siteName: "Gensoft X AI Labs",
+    title: "Gensoft X AI Labs - Data Science Training & Internship",
     description: "Become a job-ready Data Scientist in 1-3 months.",
     images: [
       {
         url: "/og-apex-tech.png",
         width: 1200,
         height: 630,
-        alt: "Apex Tech Innovation",
+        alt: "Gensoft X AI Labs",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Apex Tech Innovation - Data Science Training",
+    title: "Gensoft X AI Labs - Data Science Training",
     description: "Become a job-ready Data Scientist in 1-3 months.",
     images: ["/og-apex-tech.png"],
   },

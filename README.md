@@ -1,6 +1,6 @@
-# Apex Tech Innovation Pvt Ltd - Website
+# Gensoft X AI Labs - Website
 
-A premium, fully responsive, production-ready website for **Apex Tech Innovation Pvt Ltd**, a Data Science training & internship institute. Built with modern web technologies and a cohesive design system.
+A premium, fully responsive, production-ready website for **Gensoft X AI Labs**, a Data Science training & internship institute. Built with modern web technologies and a cohesive design system.
 
 ---
 
@@ -678,7 +678,7 @@ const teamMembers = [
 
 ## 📄 License
 
-© 2024 Apex Tech Innovation Pvt Ltd. All rights reserved.
+© 2024 Gensoft X AI Labs. All rights reserved.
 
 ---
 
@@ -1177,5 +1177,5 @@ Open your browser:
 
 ---
 
-**Built with ❤️ by Apex Tech Innovation Pvt Ltd**
+**Built with ❤️ by Gensoft X AI Labs**
 

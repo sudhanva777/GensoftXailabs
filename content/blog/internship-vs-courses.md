@@ -52,7 +52,7 @@ According to hiring managers, they prioritize:
 2. **Problem-Solving Skills** (25%)
 3. **Certificates/Courses** (15%)
 
-## The Apex Tech Approach
+## The Gensoft X AI Labs Approach
 
 Our program combines the best of both:
 - Structured curriculum (courses)

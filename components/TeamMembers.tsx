@@ -7,7 +7,7 @@ const teamMembers = [
     role: "Founder & CEO",
     image: "/team/dilip.jpg",
     description:
-      "Founder of Apex Tech Innovation Pvt Ltd, leading the mission to create a practical, job-focused Data Science training ecosystem.",
+      "Founder of Gensoft X AI Labs, leading the mission to create a practical, job-focused Data Science training ecosystem.",
   },
   {
     name: "Sudhanva Patil",
@@ -27,7 +27,7 @@ function TeamMembers() {
             Meet Our Leadership Team
           </h2>
           <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-            The visionaries behind Apex Tech Innovation
+            The visionaries behind Gensoft X AI Labs
           </p>
         </div>
 

@@ -45,7 +45,7 @@ Create a portfolio showcasing your skills:
 
 ## Step 4: Join a Structured Program
 
-Consider joining a structured program like Apex Tech Innovation's Data Science training, which provides:
+Consider joining a structured program like Gensoft X AI Labs' Data Science training, which provides:
 - Guided learning path
 - Real-world projects
 - Internship experience

@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
     const mailOptions = {
       from: process.env.CONTACT_EMAIL,
       to: process.env.CONTACT_EMAIL,
-      subject: `New ${submissionType} Received - Apex Tech Innovation`,
+      subject: `New ${submissionType} Received - Gensoft X AI Labs`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #4F46E5; border-bottom: 2px solid #6366F1; padding-bottom: 10px;">
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
             </p>
           </div>
           <p style="color: #666; font-size: 12px; margin-top: 20px;">
-            This email was sent from the Apex Tech Innovation website contact form.
+            This email was sent from the Gensoft X AI Labs website contact form.
           </p>
         </div>
       `,

@@ -14,7 +14,7 @@ export default function About() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
               About{" "}
               <span className="text-indigo-600 dark:text-indigo-400">
-                Apex Tech Innovation
+                Gensoft X AI Labs
               </span>
             </h1>
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -33,7 +33,7 @@ export default function About() {
             </h2>
             <div className="prose prose-lg max-w-none dark:prose-invert">
               <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed mb-4">
-                Apex Tech Innovation Pvt Ltd is an online-first tech training platform focused on building industry-ready talent across Data Science, AI Engineering, Machine Learning, and Full-Stack Systems. We teach practical, job-oriented skills through hands-on tasks, real-world projects, and internship experiences.
+                Gensoft X AI Labs is an online-first tech training platform focused on building industry-ready talent across Data Science, AI Engineering, Machine Learning, and Full-Stack Systems. We teach practical, job-oriented skills through hands-on tasks, real-world projects, and internship experiences.
               </p>
               <p className="text-slate-700 dark:text-slate-300 text-base leading-relaxed">
                 We believe the best way to learn tech is by doing. Our curriculum bridges the gap between theory and real-world application, ensuring students are job-ready from day one. Beyond Data Science, we're building a comprehensive ecosystem for tech professionals.
