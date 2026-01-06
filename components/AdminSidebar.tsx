@@ -55,8 +55,8 @@ export default function AdminSidebar() {
         <div className="h-full flex flex-col">
           {/* Header */}
           <div className="p-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
-            <Link href="/admin" className="flex items-center gap-2">
-              <Logo variant="symbol" />
+            <Link href="/admin" className="flex items-center gap-3">
+              <Logo width={120} height={36} className="h-9" />
               <span className="text-lg font-bold text-slate-900 dark:text-white">
                 Admin
               </span>

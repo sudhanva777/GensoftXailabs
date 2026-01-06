@@ -21,12 +21,12 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-slate-900 dark:bg-slate-950 text-slate-300 border-t border-slate-800">
+    <footer className="bg-black text-slate-300 border-t border-neutral-800">
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Company Info */}
           <div className="md:col-span-2">
-            <Logo variant="text" className="mb-4" />
+            <Logo width={160} height={48} className="mb-4" />
             <p className="text-slate-400 mb-6 leading-relaxed max-w-md">
               Empowering students with practical Data Science skills through hands-on training and real-world projects.
             </p>

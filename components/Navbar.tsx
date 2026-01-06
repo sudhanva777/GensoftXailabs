@@ -43,12 +43,12 @@ export default function Navbar() {
   }, [session?.user]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200/50 dark:border-slate-800/50 shadow-sm">
+    <nav className="sticky top-0 z-50 bg-black border-b border-neutral-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16 md:h-20 gap-6">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0">
-            <Logo variant="symbol" />
+            <Logo width={140} height={40} priority className="h-10" />
           </Link>
 
           {/* Desktop Navigation - Center */}
@@ -61,8 +61,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? "text-[#4F46E5] dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
+                      ? "text-[#4F46E5] bg-white/10"
+                      : "text-slate-200 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   {link.name}
@@ -76,7 +76,7 @@ export default function Navbar() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
@@ -86,12 +86,12 @@ export default function Navbar() {
               )}
             </button>
             {status === "loading" ? (
-              <div className="h-9 w-20 bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse" />
+              <div className="h-9 w-20 bg-white/10 rounded-lg animate-pulse" />
             ) : !session ? (
               <>
                 <Link
                   href="/auth/login"
-                  className="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
                 >
                   Login
                 </Link>
@@ -111,7 +111,7 @@ export default function Navbar() {
           <div className="lg:hidden flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? (
@@ -121,7 +121,7 @@ export default function Navbar() {
               )}
             </button>
             <button
-              className="p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors"
+              className="p-2 text-slate-300 hover:text-white transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -141,7 +141,7 @@ export default function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden overflow-hidden border-t border-slate-200 dark:border-slate-800"
+              className="lg:hidden overflow-hidden border-t border-neutral-800 bg-black"
             >
               <div className="py-4 space-y-1">
                 {navLinks.map((link) => {
@@ -152,8 +152,8 @@ export default function Navbar() {
                       href={link.href}
                       className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         isActive
-                          ? "text-[#4F46E5] dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950"
-                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
+                          ? "text-[#4F46E5] bg-white/10"
+                          : "text-slate-200 hover:text-white hover:bg-white/10"
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -161,14 +161,14 @@ export default function Navbar() {
                     </Link>
                   );
                 })}
-                <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
+                <div className="pt-4 border-t border-neutral-800 space-y-2">
                   {status === "loading" ? (
                     <div className="px-4 py-2 text-sm text-slate-400">Loading...</div>
                   ) : !session ? (
                     <>
                       <Link
                         href="/auth/login"
-                        className="block px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+                        className="block px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         Login
@@ -192,7 +192,7 @@ export default function Navbar() {
                       </Link>
                       <button
                         onClick={handleMobileLogout}
-                        className="w-full px-4 py-2 text-sm font-medium text-slate-600 hover:text-red-600 transition-colors flex items-center justify-center gap-2"
+                        className="w-full px-4 py-2 text-sm font-medium text-slate-300 hover:text-red-500 transition-colors flex items-center justify-center gap-2"
                       >
                         <LogOut className="h-4 w-4" />
                         Logout
@@ -209,7 +209,7 @@ export default function Navbar() {
                       </Link>
                       <button
                         onClick={handleMobileLogout}
-                        className="w-full px-4 py-2 text-sm font-medium text-slate-600 hover:text-red-600 transition-colors flex items-center justify-center gap-2"
+                        className="w-full px-4 py-2 text-sm font-medium text-slate-300 hover:text-red-500 transition-colors flex items-center justify-center gap-2"
                       >
                         <LogOut className="h-4 w-4" />
                         Logout
