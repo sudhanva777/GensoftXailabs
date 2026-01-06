@@ -3,10 +3,10 @@
 import { useState, useMemo, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
 import { Menu, X, LogOut, Sun, Moon } from "lucide-react";
-import Logo from "./Logo";
 import { motion, AnimatePresence } from "framer-motion";
 import AvatarDropdown from "./AvatarDropdown";
 
@@ -45,16 +45,24 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-black border-b border-neutral-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16 md:h-20 gap-6">
+        <div className="flex items-center justify-between h-16 gap-6">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0">
-            <Logo
-              width={120}
-              height={32}
-              priority
-              imageClassName="h-[1cm] w-[1cm]"
-              textClassName="text-white"
-            />
+            <div className="flex items-center gap-3">
+              <div className="h-9 w-9 overflow-hidden flex items-center justify-center">
+                <Image
+                  src="/logo.png"
+                  alt="GENSOFT AI LABS logo"
+                  width={120}
+                  height={120}
+                  priority
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <span className="text-white text-sm sm:text-base font-semibold tracking-[0.28em] uppercase whitespace-nowrap">
+                GENSOFT AI LABS
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation - Center */}
