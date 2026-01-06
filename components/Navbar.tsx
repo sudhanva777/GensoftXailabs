@@ -48,7 +48,13 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20 gap-6">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0">
-            <Logo width={140} height={40} priority className="h-10" />
+            <Logo
+              width={140}
+              height={40}
+              priority
+              imageClassName="h-10 w-auto"
+              textClassName="text-white"
+            />
           </Link>
 
           {/* Desktop Navigation - Center */}
@@ -61,8 +67,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? "text-[#4F46E5] bg-white/10"
-                      : "text-slate-200 hover:text-white hover:bg-white/10"
+                      ? "text-white bg-white/10"
+                      : "text-slate-300 hover:text-white hover:bg-white/5"
                   }`}
                 >
                   {link.name}
@@ -91,7 +97,7 @@ export default function Navbar() {
               <>
                 <Link
                   href="/auth/login"
-                  className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-slate-200 hover:text-white transition-colors"
                 >
                   Login
                 </Link>
@@ -152,8 +158,8 @@ export default function Navbar() {
                       href={link.href}
                       className={`block px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         isActive
-                          ? "text-[#4F46E5] bg-white/10"
-                          : "text-slate-200 hover:text-white hover:bg-white/10"
+                          ? "text-white bg-white/10"
+                          : "text-slate-300 hover:text-white hover:bg-white/5"
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
