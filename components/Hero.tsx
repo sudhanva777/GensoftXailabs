@@ -14,6 +14,7 @@ const rotatingKeywords = [
 
 function Hero() {
   const [currentKeyword, setCurrentKeyword] = useState(0);
+  const labsUrl = process.env.NEXT_PUBLIC_LABS_URL;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -134,6 +135,17 @@ function Hero() {
               <Phone className="mr-2 h-4 w-4" />
               Book Call
             </Link>
+            {labsUrl && (
+              <Link
+                href={labsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 bg-white border-2 border-slate-200 text-slate-700 font-semibold rounded-xl hover:border-indigo-300 hover:bg-indigo-50 transition-all shadow-sm hover:shadow-md"
+              >
+                <Sparkles className="mr-2 h-4 w-4 text-indigo-500" />
+                We Build Projects
+              </Link>
+            )}
           </motion.div>
         </motion.div>
       </div>
