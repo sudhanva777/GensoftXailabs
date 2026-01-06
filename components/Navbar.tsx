@@ -49,10 +49,10 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0">
             <Logo
-              width={15}
-              height={15}
+              width={120}
+              height={32}
               priority
-              imageClassName="h-9 w-auto"
+              imageClassName="h-8 w-auto"
               textClassName="text-white"
             />
           </Link>
