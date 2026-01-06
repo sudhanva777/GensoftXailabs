@@ -1179,3 +1179,5 @@ Open your browser:
 
 **Built with ❤️ by Gensoft X AI Labs**
 
+#   G e n s o f t X a i l a b s  
+ 
